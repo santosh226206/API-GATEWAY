@@ -10,6 +10,10 @@ spring:
           enabled: false
           lower-case-service-id: true
 
+# JWT Configuration
+jwt:
+  secret: mysecretkey12345mysecretkey12345mysecretkey12345
+  expiration: 3600000 # 1 hour in milliseconds
 
 eureka:
   client:
