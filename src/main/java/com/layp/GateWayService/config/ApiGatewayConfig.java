@@ -48,7 +48,7 @@ public class ApiGatewayConfig {
      * - Configures path rewriting for each service
      *
      * Route structure:
-     * - /auth/** -> USER-SERVICE (public)
+     * - /auth/** -> Forward to local controller (public)
      * - /layp/users/** -> USER-SERVICE (protected)
      * - /layp/hotels/** -> HOTEL-SERVICE (protected)
      * - /layp/ratings/** -> RATING-SERVICE (protected)
@@ -59,9 +59,9 @@ public class ApiGatewayConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                // Auth endpoint - no authentication required
+                // Auth endpoints - forward to local controller
                 .route(r -> r.path("/auth/**")
-                        .uri("lb://USER-SERVICE"))
+                        .uri("forward:/auth"))  // Forward to local controller
                 // Protected routes with authentication
                 .route(r -> r.path("/layp/users/**")
                         .filters(f -> f.filter(authFilter.apply(new AuthenticationFilter.Config()))

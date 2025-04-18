@@ -31,7 +31,7 @@ Client -> API Gateway -> Microservices (USER-SERVICE, HOTEL-SERVICE, RATING-SERV
 ## Service Routes
 
 ```
-/auth/** -> USER-SERVICE (public)
+/auth/** -> Handled locally by API Gateway (public)
 /layp/users/** -> USER-SERVICE (protected)
 /layp/hotels/** -> HOTEL-SERVICE (protected)
 /layp/ratings/** -> RATING-SERVICE (protected)
