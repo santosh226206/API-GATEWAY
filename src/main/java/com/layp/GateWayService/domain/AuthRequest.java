@@ -1,5 +1,9 @@
 package com.layp.GateWayService.domain;
 
+/**
+ * Data Transfer Object for authentication requests
+ * Contains user credentials for login
+ */
 public class AuthRequest {
     private String username;
     private String password;

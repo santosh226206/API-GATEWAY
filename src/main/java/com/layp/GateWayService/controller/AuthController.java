@@ -1,5 +1,6 @@
 package com.layp.GateWayService.controller;
 
+import com.layp.GateWayService.domain.AuthRequest;
 import com.layp.GateWayService.util.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,32 +83,6 @@ public class AuthController {
                     return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                             .body(new HashMap<>()));
                 });
-    }
-}
-
-/**
- * Data Transfer Object for authentication requests
- * Contains user credentials for login
- */
-class AuthRequest {
-    private String username;
-    private String password;
-
-    // Getters and setters
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
 
