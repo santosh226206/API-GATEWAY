@@ -210,10 +210,6 @@ jwt:
 4. Push to branch
 5. Create Pull Request
 
-## License
-
-[Your License Information]
-
 ## Contact
 
-[Your Contact Information] 
+[linkedIn: https://www.linkedin.com/in/santosh-kumar-9bbb52203/] 
