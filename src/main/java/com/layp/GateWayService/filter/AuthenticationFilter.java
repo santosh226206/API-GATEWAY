@@ -55,6 +55,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 }
 
                 String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
+                String userNameHeader=exchange.getRequest().getHeaders().get("x-userName").get(0);
                 if (authHeader != null && authHeader.startsWith("Bearer ")) {
                     authHeader = authHeader.substring(7);
                 }
@@ -64,7 +65,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                     // Add user details to headers for downstream services
                     String username = jwtUtil.extractUsername(authHeader);
                     String role = jwtUtil.extractRole(authHeader);
-                    
+                    if(!userNameHeader.equals(username)){
+                        throw new Exception("Invalid user Token");
+                    }
                     exchange.getRequest().mutate()
                         .header("X-Auth-User", username)
                         .header("X-Auth-Role", role)
