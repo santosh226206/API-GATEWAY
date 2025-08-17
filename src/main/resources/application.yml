@@ -1,39 +1,65 @@
+#server:
+#  port: 8084
+#spring:
+#  application:
+#    name: API-GATEWAY
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: false
+#          lower-case-service-id: true
 server:
   port: 8084
 spring:
   application:
     name: API-GATEWAY
   cloud:
-    gateway:
+    consul:
+      enabled: true
+      host: localhost
+      port: 8500
       discovery:
-        locator:
-          enabled: false
-          lower-case-service-id: true
+        enabled: true
+        service-name: ${spring.application.name}
+        prefer-ip-address: true
+        health-check-path: /actuator/health
+        health-check-interval: 15s
+        health-check-timeout: 5s
+        instance-id: ${spring.application.name}:${server.port}
+        register: true
+        deregister: true
+        tags:
+          - api-gateway
+          - spring-boot
+        metadata:
+          version: 1.0.0
+          environment: development
 
 # JWT Configuration
 jwt:
   secret: mysecretkey12345mysecretkey12345mysecretkey12345
   expiration: 3600000 # 1 hour in milliseconds
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  info:
-    env:
-      enabled: true
-  endpoint:
-    gateway:
-      enabled: true
-info:
-  app:
-    name: "API-GATEWAY"
-    description: "This is an API gateway"
-    version: "1.0"
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+#
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  info:
+#    env:
+#      enabled: true
+#  endpoint:
+#    gateway:
+#      enabled: true
+#info:
+#  app:
+#    name: "API-GATEWAY"
+#    description: "This is an API gateway"
+#    version: "1.0"

@@ -58,7 +58,7 @@ public class AuthController {
         
         return webClientBuilder.build()
                 .post()
-                .uri("lb://USER-SERVICE/users/validate")
+                .uri("http://USER-SERVICE/users/validate")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(request)
                 .retrieve()
